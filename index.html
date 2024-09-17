@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mr. Bunthanh - Your Guide to Cambodia</title>
+    <style>
+        /* Mobile-first responsive design */
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            background-image: url('/api/placeholder/1600/900');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            min-height: 100vh;
+        }
+        .content-wrapper {
+            background-color: rgba(255, 255, 255, 0.9);
+            max-width: 100%;
+            margin: 0 auto;
+            padding: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        }
+        header {
+            background-color: rgba(76, 175, 80, 0.9);
+            color: white;
+            text-align: center;
+            padding: 1em;
+            border-radius: 5px;
+        }
+        h1 {
+            margin-bottom: 0;
+            font-size: 1.8em;
+        }
+        .tagline {
+            font-style: italic;
+            margin-top: 0;
+            font-size: 1em;
+        }
+        .profile-img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            display: block;
+            margin: 20px auto;
+            border: 5px solid #4CAF50;
+        }
+        .services {
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 15px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .cta-button {
+            display: inline-block;
+            width: 90%;
+            margin: 10px 5px;
+            padding: 10px;
+            color: white;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+        .email-button { background-color: #D44638; }
+        .email-button:hover { background-color: #B23121; }
+        .whatsapp-button { background-color: #25D366; }
+        .whatsapp-button:hover { background-color: #128C7E; }
+        .wechat-button { background-color: #7BB32E; }
+        .wechat-button:hover { background-color: #6B9E29; }
+        .button-container { text-align: center; }
+
+        /* Collapsible sections */
+        .collapsible {
+            background-color: #4CAF50;
+            color: white;
+            cursor: pointer;
+            padding: 18px;
+            width: 100%;
+            border: none;
+            text-align: left;
+            outline: none;
+            font-size: 15px;
+        }
+        .active, .collapsible:hover {
+            background-color: #3e8e41;
+        }
+        .collapsible:after {
+            content: '\002B';
+            color: white;
+            font-weight: bold;
+            float: right;
+            margin-left: 5px;
+        }
+        .active:after {
+            content: "\2212";
+        }
+        .content {
+            padding: 0 18px;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.2s ease-out;
+            background-color: rgba(255, 255, 255, 0.8);
+        }
+
+        /* Photo gallery */
+        .gallery {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            margin-top: 20px;
+        }
+        .gallery-item {
+            width: 100%;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            border-radius: 5px;
+            overflow: hidden;
+        }
+        .gallery-item img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        .gallery-caption {
+            background-color: rgba(76, 175, 80, 0.8);
+            color: white;
+            padding: 10px;
+            text-align: center;
+        }
+
+        /* Language selector */
+        .language-selector {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+        }
+        .language-selector select {
+            padding: 5px;
+            border-radius: 5px;
+            border: 1px solid #4CAF50;
+            background-color: white;
+        }
+
+        /* Larger screen styles */
+        @media screen and (min-width: 768px) {
+            .content-wrapper {
+                max-width: 800px;
+                padding: 20px;
+            }
+            h1 { font-size: 2.5em; }
+            .tagline { font-size: 1.2em; }
+            .profile-img {
+                width: 200px;
+                height: 200px;
+            }
+            .cta-button {
+                width: 180px;
+            }
+            .gallery-item {
+                width: calc(33.33% - 20px);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="content-wrapper">
+	<header>
+		<h1>
+			<span class="lang-en">Mr. Bunthanh</span>
+			<span class="lang-km">លោក បុនថាន</span>
+			<span class="lang-zh">Bunthanh 先生</span>
+		</h1>
+		<p class="tagline">
+			<span class="lang-en">Your Personal Guide to the Wonders of Cambodia</span>
+			<span class="lang-km">មគ្គុទេសក៍ផ្ទាល់ខ្លួនរបស់អ្នកទៅកាន់អព្ភូតហេតុនៃប្រទេសកម្ពុជា</span>
+			<span class="lang-zh">您探索柬埔寨奇迹的私人向导</span>
+		</p>
+	</header>
+
+        <div class="language-selector">
+            <select id="languageSelect" onchange="changeLanguage()">
+                <option value="en">English</option>
+                <option value="km">ភាសាខ្មែរ</option>
+                <option value="zh">中文</option>
+            </select>
+        </div>
+
+        <img src="bunthanh.png" alt="Mr. Bunthanh" class="profile-img">
+
+        <button class="collapsible" id="servicesBtn">Discover Cambodia with a Local Expert</button>
+        <div class="content" id="servicesContent">
+            <p class="lang-en">Hello! I'm Mr. Bunthanh, your friendly and knowledgeable tour guide and driver in beautiful Cambodia. With years of experience and a passion for sharing my country's rich culture and history, I'm here to make your Cambodian adventure unforgettable.</p>
+            <p class="lang-km">សួស្តី! ខ្ញុំឈ្មោះលោក បុនថាន ជាមគ្គុទេសក៍និងអ្នកបើកបរដែលមានចំណេះដឹងនិងរួសរាយរាក់ទាក់នៅក្នុងប្រទេសកម្ពុជាដ៏ស្រស់ស្អាត។ ដោយមានបទពិសោធន៍ច្រើនឆ្នាំនិងចំណង់ចំណូលចិត្តក្នុងការចែករំលែកវប្បធម៌និងប្រវត្តិសាស្ត្រដ៏សម្បូរបែបរបស់ប្រទេសខ្ញុំ ខ្ញុំនៅទីនេះដើម្បីធ្វើឱ្យការផ្សងព្រេងរបស់អ្នកនៅកម្ពុជាមិនអាចបំភ្លេចបាន។</p>
+            <p class="lang-zh">你好！我是Bunthanh先生，是您在美丽的柬埔寨的友好和知识渊博的导游和司机。凭借多年的经验和分享我国丰富文化和历史的热情，我在这里让您的柬埔寨冒险难忘。</p>
+            
+            <h3 class="lang-en">My Services:</h3>
+            <h3 class="lang-km">សេវាកម្មរបស់ខ្ញុំ៖</h3>
+            <h3 class="lang-zh">我的服务：</h3>
+            <ul>
+                <li class="lang-en">Personalized tours of Angkor Wat and other temples</li>
+                <li class="lang-km">ដំណើរកម្សាន្តផ្ទាល់ខ្លួននៅប្រាសាទអង្គរវត្តនិងប្រាសាទផ្សេងទៀត</li>
+                <li class="lang-zh">吴哥窟和其他寺庙的个性化游览</li>
+                
+                <li class="lang-en">City tours of Siem Reap, Phnom Penh, and other major cities</li>
+                <li class="lang-km">ដំណើរកម្សាន្តក្នុងក្រុងសៀមរាប ភ្នំពេញ និងទីក្រុងសំខាន់ៗផ្សេងទៀត</li>
+                <li class="lang-zh">暹粒、金边和其他主要城市的城市游览</li>
+                
+                <li class="lang-en">Off-the-beaten-path adventures to hidden gems</li>
+                <li class="lang-km">ដំណើរផ្សងព្រេងទៅកាន់កន្លែងលាក់កំបាំងដែលមិនសូវមានភ្ញៀវទេសចរណ៍</li>
+                <li class="lang-zh">探索隐藏的宝藏的非常规冒险</li>
+                
+                <li class="lang-en">Cultural experiences with local communities</li>
+                <li class="lang-km">បទពិសោធន៍វប្បធម៌ជាមួយសហគមន៍មូលដ្ឋាន</li>
+                <li class="lang-zh">与当地社区的文化体验</li>
+                
+                <li class="lang-en">Safe and comfortable transportation throughout your journey</li>
+                <li class="lang-km">ការដឹកជញ្ជូនដែលមានសុវត្ថិភាពនិងផាសុកភាពពេញមួយដំណើរទស្សនកិច្ចរបស់អ្នក</li>
+                <li class="lang-zh">全程安全舒适的交通</li>
+            </ul>
+        </div>
+
+        <button class="collapsible" id="whyChooseBtn">Why Choose Me?</button>
+        <div class="content" id="whyChooseContent">
+            <ul>
+                <li class="lang-en">Fluent in English and Khmer</li>
+                <li class="lang-km">និយាយភាសាអង់គ្លេសនិងខ្មែរយ៉ាងស្ទាត់ជំនាញ</li>
+                <li class="lang-zh">流利的英语和高棉语</li>
+                
+                <li class="lang-en">In-depth knowledge of Cambodian history and culture</li>
+                <li class="lang-km">ចំណេះដឹងស៊ីជម្រៅអំពីប្រវត្តិសាស្ត្រនិងវប្បធម៌ខ្មែរ</li>
+                <li class="lang-zh">对柬埔寨历史和文化的深入了解</li>
+                
+                <li class="lang-en">Flexible itineraries tailored to your interests</li>
+                <li class="lang-km">កម្មវិធីដំណើរកម្សាន្តដែលអាចបត់បែនបានតាមចំណាប់អារម្មណ៍របស់អ្នក</li>
+                <li class="lang-zh">根据您的兴趣定制的灵活行程</li>
+                
+                <li class="lang-en">Friendly, patient, and attentive to your needs</li>
+                <li class="lang-km">រួសរាយរាក់ទាក់ អត់ធ្មត់ និងយកចិត្តទុកដាក់ចំពោះតម្រូវការរបស់អ្នក</li>
+                <li class="lang-zh">友好、耐心，关注您的需求</li>
+                
+                <li class="lang-en">Excellent driving skills and a focus on your safety</li>
+                <li class="lang-km">ជំនាញបើកបរល្អឥតខ្ចោះនិងផ្តោតលើសុវត្ថិភាពរបស់អ្នក</li>
+                <li class="lang-zh">出色的驾驶技能，注重您的安全</li>
+            </ul>
+        </div>
+
+        <!--div class="gallery">
+            <div class="gallery-item">
+                <img src="/api/placeholder/600/400" alt="Angkor Wat">
+                <div class="gallery-caption">
+                    <span class="lang-en">Majestic Angkor Wat</span>
+                    <span class="lang-km">ប្រាសាទអង្គរវត្តដ៏អស្ចារ្យ</span>
+                    <span class="lang-zh">雄伟的吴哥窟</span>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <img src="/api/placeholder/600/400" alt="Phnom Penh Royal Palace">
+                <div class="gallery-caption">
+                    <span class="lang-en">Royal Palace, Phnom Penh</span>
+                    <span class="lang-km">ព្រះបរមរាជវាំង ភ្នំពេញ</span>
+                    <span class="lang-zh">金边皇宫</span>
+                </div>
+            </div>
+        </div-->
+		<div class="button-container">
+			<a href="mailto:angkorwat416@gmail.com?subject=Tour%20Inquiry%20for%20Mr.%20Bunthanh&body=Dear%20Mr.%20Bunthanh,%0D%0A%0D%0AI'm%20interested%20in%20booking%20a%20tour%20with%20you.%20Here%20are%20some%20details%20about%20my%20trip:%0D%0A%0D%0A-%20Preferred%20dates:%20[Please%20fill%20in]%0D%0A-%20Number%20of%20people:%20[Please%20fill%20in]%0D%0A-%20Areas%20of%20interest:%20[Please%20fill%20in]%0D%0A-%20Any%20special%20requirements:%20[Please%20fill%20in]%0D%0A%0D%0APlease%20let%20me%20know%20your%20availability%20and%20any%20additional%20information%20I%20should%20know.%0D%0A%0D%0AThank%20you,%0D%0A[Your%20Name]" class="cta-button email-button">
+				<span class="lang-en">Email Me</span>
+				<span class="lang-km">អ៊ីមែលមកខ្ញុំ</span>
+				<span class="lang-zh">给我发邮件</span>
+			</a>
+			<a href="https://wa.me/85512620477" class="cta-button whatsapp-button" target="_blank">
+				<span class="lang-en">WhatsApp Me</span>
+				<span class="lang-km">WhatsApp មកខ្ញុំ</span>
+				<span class="lang-zh">WhatsApp联系我</span>
+			</a>
+			<a href="#" class="cta-button wechat-button" onclick="alert('WeChat ID: BunCambodiaGuide')">
+				<span class="lang-en">WeChat Me</span>
+				<span class="lang-km">WeChat មកខ្ញុំ</span>
+				<span class="lang-zh">微信联系我</span>
+			</a>
+		</div>
+		
+	</div>
+<script>
+function changeLanguage() {
+    var lang = document.getElementById("languageSelect").value;
+    var languageClasses = ["lang-en", "lang-km", "lang-zh"];
+    
+    // Hide all language elements
+    languageClasses.forEach(function(cls) {
+        var elements = document.getElementsByClassName(cls);
+        for (var i = 0; i < elements.length; i++) {
+            elements[i].style.display = "none";
+        }
+    });
+    
+    // Show elements for the selected language
+    var selectedElements = document.getElementsByClassName("lang-" + lang);
+    for (var i = 0; i < selectedElements.length; i++) {
+        selectedElements[i].style.display = "block";
+    }
+
+    // Update button text
+    var buttonTexts = {
+        "servicesBtn": {
+            "en": "Discover Cambodia with a Local Expert",
+            "km": "ស្វែងយល់ពីប្រទេសកម្ពុជាជាមួយអ្នកជំនាញក្នុងស្រុក",
+            "zh": "与当地专家一起探索柬埔寨"
+        },
+        "whyChooseBtn": {
+            "en": "Why Choose Me?",
+            "km": "ហេតុអ្វីបានជាជ្រើសរើសខ្ញុំ?",
+            "zh": "为什么选择我？"
+        }
+    };
+
+    Object.keys(buttonTexts).forEach(function(btnId) {
+        var btn = document.getElementById(btnId);
+        if (btn) {
+            btn.innerText = buttonTexts[btnId][lang];
+        }
+    });
+
+    // Update email link
+    var emailLink = document.querySelector(".email-button");
+    if (emailLink) {
+        var emailTexts = {
+            "en": {
+                "subject": "Tour%20Inquiry%20for%20Mr.%20Bunthanh",
+                "body": "Dear%20Mr.%20Bunthanh,%0D%0A%0D%0AI'm%20interested%20in%20booking%20a%20tour%20with%20you.%20Here%20are%20some%20details%20about%20my%20trip:%0D%0A%0D%0A-%20Preferred%20dates:%20[Please%20fill%20in]%0D%0A-%20Number%20of%20people:%20[Please%20fill%20in]%0D%0A-%20Areas%20of%20interest:%20[Please%20fill%20in]%0D%0A-%20Any%20special%20requirements:%20[Please%20fill%20in]%0D%0A%0D%0APlease%20let%20me%20know%20your%20availability%20and%20any%20additional%20information%20I%20should%20know.%0D%0A%0D%0AThank%20you,%0D%0A[Your%20Name]",
+                "buttonText": "Email Me"
+            },
+            "km": {
+                "subject": "សំណួរអំពីដំណើរកម្សាន្តសម្រាប់លោក%20បុនថាន",
+                "body": "ជូនចំពោះលោក%20បុនថាន,%0D%0A%0D%0Aខ្ញុំមានចំណាប់អារម្មណ៍ក្នុងការកក់ដំណើរកម្សាន្តជាមួយអ្នក។%20នេះគឺជាព័ត៌មានលម្អិតមួយចំនួនអំពីការធ្វើដំណើររបស់ខ្ញុំ:%0D%0A%0D%0A-%20កាលបរិច្ឆេទដែលចង់បាន:%20[សូមបំពេញ]%0D%0A-%20ចំនួនមនុស្ស:%20[សូមបំពេញ]%0D%0A-%20តំបន់ដែលចាប់អារម្មណ៍:%20[សូមបំពេញ]%0D%0A-%20តម្រូវការពិសេសណាមួយ:%20[សូមបំពេញ]%0D%0A%0D%0Aសូមជម្រាបខ្ញុំអំពីភាពទំនេររបស់អ្នកនិងព័ត៌មានបន្ថែមណាមួយដែលខ្ញុំគួរដឹង។%0D%0A%0D%0Aសូមអរគុណ,%0D%0A[ឈ្មោះរបស់អ្នក]",
+                "buttonText": "អ៊ីមែលមកខ្ញុំ"
+            },
+            "zh": {
+                "subject": "Bunthanh先生的旅游咨询",
+                "body": "尊敬的Bunthanh先生,%0D%0A%0D%0A我有兴趣预订您的旅游服务。以下是我的行程详情：%0D%0A%0D%0A-%20首选日期：[请填写]%0D%0A-%20人数：[请填写]%0D%0A-%20感兴趣的地区：[请填写]%0D%0A-%20任何特殊要求：[请填写]%0D%0A%0D%0A请告知您的可用性和我应该知道的任何其他信息。%0D%0A%0D%0A谢谢,%0D%0A[您的姓名]",
+                "buttonText": "给我发邮件"
+            }
+        };
+
+        emailLink.href = "mailto:angkorwat416@gmail.com?subject=" + emailTexts[lang].subject + "&body=" + emailTexts[lang].body;
+        emailLink.innerText = emailTexts[lang].buttonText;
+    }
+
+    // Update other button texts
+    var buttonTranslations = {
+        ".whatsapp-button": {
+            "en": "WhatsApp Me",
+            "km": "WhatsApp មកខ្ញុំ",
+            "zh": "WhatsApp联系我"
+        },
+        ".wechat-button": {
+            "en": "WeChat Me",
+            "km": "WeChat មកខ្ញុំ",
+            "zh": "微信联系我"
+        }
+    };
+
+    Object.keys(buttonTranslations).forEach(function(selector) {
+        var button = document.querySelector(selector);
+        if (button) {
+            button.innerText = buttonTranslations[selector][lang];
+        }
+    });
+}
+
+// Initialize language
+changeLanguage();
+
+// Add click event listeners to collapsible buttons
+var coll = document.getElementsByClassName("collapsible");
+for (var i = 0; i < coll.length; i++) {
+    coll[i].addEventListener("click", function() {
+        this.classList.toggle("active");
+        var content = this.nextElementSibling;
+        if (content.style.maxHeight){
+            content.style.maxHeight = null;
+        } else {
+            content.style.maxHeight = content.scrollHeight + "px";
+        }
+    });
+}
+
+// Add event listener to language selector
+document.getElementById("languageSelect").addEventListener("change", changeLanguage);
+</script>
+</body>
+</html>	
